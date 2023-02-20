@@ -10,13 +10,12 @@
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  # validates :username, :session_token, presence: true, uniqueness: true
+  # validates :password_digest, presence: true
+  # validates :password, length: { minimum: 6 }, allow: nil
+  # validates :password, inclusion: { in: ["!", "@", ".", "?"] }
 
-  validates :username, :session_token, presence: true, uniqueness: true
-  validates :password_digest, presence: true
-  validates :password, length: { minimum: 6 }, allow: nil
-  validates :password, inclusion: { in: ["!", "@", ".", "?"] }
-
-  before_validations :ensure_session_token
+  # before_validations :ensure_session_token
 
   attr_reader :password
 
@@ -45,7 +44,6 @@ class User < ApplicationRecord
     self.session_token
   end
 
-
   private
 
   def generate_unique_session_token
@@ -59,7 +57,4 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= generate_unique_session_token
   end
-
-
-
 end
